@@ -13,8 +13,9 @@ const sequelize = require('./config/database');
 // Importa os models (isso registra as tabelas e os relacionamentos)
 require('./models');
 
-// Importa as rotas de animais
+// Importa as rotas
 const animalRoutes = require('./routes/animalRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Cria a aplicação. Todo o projeto vai se apoiar neste "app"
 const app = express();
@@ -49,6 +50,9 @@ app.use(session({
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+// Rotas de cadastro e login (/cadastro, /login...)
+app.use('/', authRoutes);
 
 // Todas as rotas de animais ficam sob o endereço /animais
 app.use('/animais', animalRoutes);

@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<h1>Criar conta</h1>
+
+<% if (erro) { %>
+  <p><strong><%= erro %></strong></p>
+<% } %>
+
+<form action="/cadastro" method="POST">
+  <p>
+    <label>Nome:</label><br>
+    <input type="text" name="nome" required>
+  </p>
+
+  <p>
+    <label>E-mail:</label><br>
+    <input type="email" name="email" required>
+  </p>
+
+  <p>
+    <label>Senha (mínimo 6 caracteres):</label><br>
+    <input type="password" name="senha" minlength="6" required>
+  </p>
+
+  <button type="submit">Cadastrar</button>
+</form>
+
+<%- include('../partials/footer') %>
