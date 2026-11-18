@@ -1,5 +1,11 @@
+// Lê o arquivo .env (precisa ser a primeira linha)
+require('dotenv').config();
+
 // Importa o Express, a biblioteca que cria o servidor
 const express = require('express');
+
+// Importa a conexão com o banco
+const sequelize = require('./config/database');
 
 // Cria a aplicação. Todo o projeto vai se apoiar neste "app"
 const app = express();
@@ -24,7 +30,14 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Liga o servidor e fica "escutando" na porta definida
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+// Testa a conexão com o banco e, se der certo, liga o servidor
+sequelize.authenticate()
+  .then(() => {
+    console.log('Conectado ao banco de dados!');
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
+  })
+  .catch((erro) => {
+    console.log('Erro ao conectar no banco:', erro.message);
+  });
