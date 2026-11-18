@@ -19,5 +19,8 @@ router.get('/:id/editar', animalController.formularioEditar);
 // POST /animais/3/editar - recebe o formulário e atualiza o animal
 router.post('/:id/editar', animalController.atualizar);
 
+// POST /animais/3/excluir - exclui o animal
+router.post('/:id/excluir', animalController.excluir);
+
 // Exporta as rotas
 module.exports = router;
