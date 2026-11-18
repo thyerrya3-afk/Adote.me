@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+<h1>Animais disponíveis</h1>
+
+<% if (animais.length === 0) { %>
+  <p>Nenhum animal cadastrado ainda.</p>
+<% } else { %>
+  <% animais.forEach(function(animal) { %>
+    <div>
+      <h3><%= animal.nome %></h3>
+      <p>Espécie: <%= animal.especie %></p>
+      <p>Idade: <%= animal.idade %> ano(s)</p>
+      <p>Sexo: <%= animal.sexo %></p>
+      <p>Situação: <%= animal.situacao %></p>
+    </div>
+  <% }) %>
+<% } %>
+
+<%- include('../partials/footer') %>

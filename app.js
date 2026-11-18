@@ -10,6 +10,9 @@ const sequelize = require('./config/database');
 // Importa os models (isso registra as tabelas e os relacionamentos)
 require('./models');
 
+// Importa as rotas de animais
+const animalRoutes = require('./routes/animalRoutes');
+
 // Cria a aplicação. Todo o projeto vai se apoiar neste "app"
 const app = express();
 
@@ -32,6 +35,9 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+// Todas as rotas de animais ficam sob o endereço /animais
+app.use('/animais', animalRoutes);
 
 // Cria as tabelas no banco (se ainda não existirem) e liga o servidor
 sequelize.sync()
