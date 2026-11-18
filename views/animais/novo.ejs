@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+
+<h1>Cadastrar animal</h1>
+
+<form action="/animais" method="POST">
+  <p>
+    <label>Nome:</label><br>
+    <input type="text" name="nome" required>
+  </p>
+
+  <p>
+    <label>Espécie:</label><br>
+    <input type="text" name="especie" required>
+  </p>
+
+  <p>
+    <label>Idade (anos):</label><br>
+    <input type="number" name="idade" min="0" required>
+  </p>
+
+  <p>
+    <label>Sexo:</label><br>
+    <select name="sexo" required>
+      <option value="macho">Macho</option>
+      <option value="fêmea">Fêmea</option>
+    </select>
+  </p>
+
+  <p>
+    <label>Descrição:</label><br>
+    <textarea name="descricao" rows="4" cols="40"></textarea>
+  </p>
+
+  <button type="submit">Cadastrar</button>
+</form>
+
+<p><a href="/animais">Voltar para a lista</a></p>
+
+<%- include('../partials/footer') %>
