@@ -4,6 +4,9 @@ require('dotenv').config();
 // Importa o Express, a biblioteca que cria o servidor
 const express = require('express');
 
+// Importa o módulo de sessão
+const session = require('express-session');
+
 // Importa a conexão com o banco
 const sequelize = require('./config/database');
 
@@ -30,6 +33,17 @@ app.use(express.json());
 
 // Libera a pasta "public" para o navegador (CSS, JS, imagens)
 app.use(express.static('public'));
+
+// Configura a sessão (guarda quem está logado)
+app.use(session({
+  secret: process.env.SESSION_SECRET, // chave secreta que vem do .env
+  resave: false,                      // não regrava a sessão se nada mudou
+  saveUninitialized: false,           // não cria sessão para quem não logou
+  cookie: {
+    httpOnly: true,                   // o JavaScript do navegador não lê o cookie
+    maxAge: 1000 * 60 * 60            // a sessão dura 1 hora
+  }
+}));
 
 // Rota da página inicial: mostra o arquivo views/index.ejs
 app.get('/', (req, res) => {
