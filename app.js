@@ -7,6 +7,9 @@ const express = require('express');
 // Importa a conexão com o banco
 const sequelize = require('./config/database');
 
+// Importa os models (isso registra as tabelas e os relacionamentos)
+require('./models');
+
 // Cria a aplicação. Todo o projeto vai se apoiar neste "app"
 const app = express();
 
@@ -30,10 +33,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Testa a conexão com o banco e, se der certo, liga o servidor
-sequelize.authenticate()
+// Cria as tabelas no banco (se ainda não existirem) e liga o servidor
+sequelize.sync()
   .then(() => {
-    console.log('Conectado ao banco de dados!');
+    console.log('Tabelas sincronizadas com o banco de dados!');
     app.listen(PORT, () => {
       console.log(`Servidor rodando em http://localhost:${PORT}`);
     });
