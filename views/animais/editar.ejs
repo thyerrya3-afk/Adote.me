@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+
+<h1>Editar animal</h1>
+
+<form action="/animais/<%= animal.id %>/editar" method="POST">
+  <p>
+    <label>Nome:</label><br>
+    <input type="text" name="nome" value="<%= animal.nome %>" required>
+  </p>
+
+  <p>
+    <label>Espécie:</label><br>
+    <input type="text" name="especie" value="<%= animal.especie %>" required>
+  </p>
+
+  <p>
+    <label>Idade (anos):</label><br>
+    <input type="number" name="idade" min="0" value="<%= animal.idade %>" required>
+  </p>
+
+  <p>
+    <label>Sexo:</label><br>
+    <select name="sexo" required>
+      <option value="macho" <%= animal.sexo === 'macho' ? 'selected' : '' %>>Macho</option>
+      <option value="fêmea" <%= animal.sexo === 'fêmea' ? 'selected' : '' %>>Fêmea</option>
+    </select>
+  </p>
+
+  <p>
+    <label>Situação:</label><br>
+    <select name="situacao" required>
+      <option value="disponivel" <%= animal.situacao === 'disponivel' ? 'selected' : '' %>>Disponível</option>
+      <option value="adotado" <%= animal.situacao === 'adotado' ? 'selected' : '' %>>Adotado</option>
+    </select>
+  </p>
+
+  <p>
+    <label>Descrição:</label><br>
+    <textarea name="descricao" rows="4" cols="40"><%= animal.descricao %></textarea>
+  </p>
+
+  <button type="submit">Salvar alterações</button>
+</form>
+
+<p><a href="/animais">Voltar para a lista</a></p>
+
+<%- include('../partials/footer') %>

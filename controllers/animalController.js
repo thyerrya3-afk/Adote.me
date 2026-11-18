@@ -19,15 +19,47 @@ exports.formulario = (req, res) => {
 // Recebe os dados do formulário e salva o animal no banco
 exports.criar = async (req, res) => {
   try {
-    // Pega os campos que vieram do formulário
     const { nome, especie, idade, sexo, descricao } = req.body;
-
-    // Cria o animal na tabela (é o INSERT do banco)
     await Animal.create({ nome, especie, idade, sexo, descricao });
-
-    // Depois de salvar, volta para a lista de animais
     res.redirect('/animais');
   } catch (erro) {
     res.status(500).send('Erro ao cadastrar o animal.');
+  }
+};
+
+// Mostra o formulário de edição já preenchido com os dados do animal
+exports.formularioEditar = async (req, res) => {
+  try {
+    // req.params.id é o número que vem na URL (/animais/3/editar)
+    const animal = await Animal.findByPk(req.params.id);
+
+    // Se não existir animal com esse id, avisa
+    if (!animal) {
+      return res.status(404).send('Animal não encontrado.');
+    }
+
+    res.render('animais/editar', { animal });
+  } catch (erro) {
+    res.status(500).send('Erro ao buscar o animal.');
+  }
+};
+
+// Recebe os dados do formulário de edição e atualiza o animal
+exports.atualizar = async (req, res) => {
+  try {
+    const animal = await Animal.findByPk(req.params.id);
+
+    if (!animal) {
+      return res.status(404).send('Animal não encontrado.');
+    }
+
+    const { nome, especie, idade, sexo, descricao, situacao } = req.body;
+
+    // Atualiza as colunas no banco (é o UPDATE)
+    await animal.update({ nome, especie, idade, sexo, descricao, situacao });
+
+    res.redirect('/animais');
+  } catch (erro) {
+    res.status(500).send('Erro ao atualizar o animal.');
   }
 };
