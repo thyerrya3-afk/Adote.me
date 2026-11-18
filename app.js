@@ -46,6 +46,13 @@ app.use(session({
   }
 }));
 
+// Deixa a variável "usuario" disponível em todas as páginas EJS
+// (é o usuário logado, ou null se ninguém estiver logado)
+app.use((req, res, next) => {
+  res.locals.usuario = req.session.usuario || null;
+  next();
+});
+
 // Rota da página inicial: mostra o arquivo views/index.ejs
 app.get('/', (req, res) => {
   res.render('index');

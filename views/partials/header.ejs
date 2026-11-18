@@ -11,6 +11,16 @@
     <nav>
       <a href="/">Início</a>
       <a href="/animais">Animais</a>
+
+      <% if (usuario) { %>
+        <span>Olá, <%= usuario.nome %></span>
+        <form action="/logout" method="POST" style="display:inline;">
+          <button type="submit">Sair</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Entrar</a>
+        <a href="/cadastro">Cadastrar</a>
+      <% } %>
     </nav>
   </header>
   <main>
