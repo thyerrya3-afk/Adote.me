@@ -2,7 +2,9 @@
 
 <h1>Animais disponíveis</h1>
 
-<p><a href="/animais/novo">Cadastrar novo animal</a></p>
+<% if (usuario && usuario.tipo === 'administrador') { %>
+  <p><a href="/animais/novo">Cadastrar novo animal</a></p>
+<% } %>
 
 <% if (animais.length === 0) { %>
   <p>Nenhum animal cadastrado ainda.</p>
@@ -14,12 +16,15 @@
       <p>Idade: <%= animal.idade %> ano(s)</p>
       <p>Sexo: <%= animal.sexo %></p>
       <p>Situação: <%= animal.situacao %></p>
-      <p><a href="/animais/<%= animal.id %>/editar">Editar</a></p>
 
-      <form action="/animais/<%= animal.id %>/excluir" method="POST"
-            onsubmit="return confirm('Tem certeza que deseja excluir este animal?');">
-        <button type="submit">Excluir</button>
-      </form>
+      <% if (usuario && usuario.tipo === 'administrador') { %>
+        <p><a href="/animais/<%= animal.id %>/editar">Editar</a></p>
+
+        <form action="/animais/<%= animal.id %>/excluir" method="POST"
+              onsubmit="return confirm('Tem certeza que deseja excluir este animal?');">
+          <button type="submit">Excluir</button>
+        </form>
+      <% } %>
     </div>
   <% }) %>
 <% } %>

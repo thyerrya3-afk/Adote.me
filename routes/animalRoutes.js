@@ -4,23 +4,18 @@ const router = express.Router();
 // Importa o controller de animais
 const animalController = require('../controllers/animalController');
 
-// GET /animais - mostra a lista
+// Importa o middleware que só deixa passar administradores
+const { ehAdmin } = require('../middlewares/auth');
+
+// GET /animais - lista (qualquer pessoa pode ver)
 router.get('/', animalController.listar);
 
-// GET /animais/novo - mostra o formulário de cadastro
-router.get('/novo', animalController.formulario);
-
-// POST /animais - recebe o formulário e salva o animal
-router.post('/', animalController.criar);
-
-// GET /animais/3/editar - mostra o formulário de edição
-router.get('/:id/editar', animalController.formularioEditar);
-
-// POST /animais/3/editar - recebe o formulário e atualiza o animal
-router.post('/:id/editar', animalController.atualizar);
-
-// POST /animais/3/excluir - exclui o animal
-router.post('/:id/excluir', animalController.excluir);
+// Rotas abaixo: só administrador (ehAdmin roda antes do controller)
+router.get('/novo', ehAdmin, animalController.formulario);
+router.post('/', ehAdmin, animalController.criar);
+router.get('/:id/editar', ehAdmin, animalController.formularioEditar);
+router.post('/:id/editar', ehAdmin, animalController.atualizar);
+router.post('/:id/excluir', ehAdmin, animalController.excluir);
 
 // Exporta as rotas
 module.exports = router;
