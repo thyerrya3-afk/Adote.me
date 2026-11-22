@@ -25,8 +25,19 @@
           <button type="submit">Excluir</button>
         </form>
       <% } %>
+
+      <% if (animal.situacao === 'disponivel') { %>
+        <% if (usuario && usuario.tipo === 'adotante') { %>
+          <button class="btn-solicitar" data-id="<%= animal.id %>">Quero adotar</button>
+          <p id="msg-<%= animal.id %>"></p>
+        <% } else if (!usuario) { %>
+          <p><a href="/login">Entre</a> para solicitar a adoção.</p>
+        <% } %>
+      <% } %>
     </div>
   <% }) %>
 <% } %>
+
+<script src="/js/solicitar.js"></script>
 
 <%- include('../partials/footer') %>

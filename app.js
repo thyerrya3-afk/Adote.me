@@ -16,6 +16,7 @@ require('./models');
 // Importa as rotas
 const animalRoutes = require('./routes/animalRoutes');
 const authRoutes = require('./routes/authRoutes');
+const solicitacaoRoutes = require('./routes/solicitacaoRoutes');
 
 // Cria a aplicação. Todo o projeto vai se apoiar neste "app"
 const app = express();
@@ -29,7 +30,7 @@ app.set('view engine', 'ejs');
 // Permite ler dados enviados por formulários HTML (cadastro, login)
 app.use(express.urlencoded({ extended: true }));
 
-// Permite ler dados enviados em formato JSON (vamos usar no AJAX/Fetch)
+// Permite ler dados enviados em formato JSON (usado no AJAX/Fetch)
 app.use(express.json());
 
 // Libera a pasta "public" para o navegador (CSS, JS, imagens)
@@ -63,6 +64,9 @@ app.use('/', authRoutes);
 
 // Todas as rotas de animais ficam sob o endereço /animais
 app.use('/animais', animalRoutes);
+
+// Todas as rotas de solicitações ficam sob o endereço /solicitacoes
+app.use('/solicitacoes', solicitacaoRoutes);
 
 // Cria as tabelas no banco (se ainda não existirem) e liga o servidor
 sequelize.sync()
