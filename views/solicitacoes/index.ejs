@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<% if (usuario.tipo === 'administrador') { %>
+  <h1>Todas as solicitações de adoção</h1>
+<% } else { %>
+  <h1>Minhas solicitações de adoção</h1>
+<% } %>
+
+<% if (solicitacoes.length === 0) { %>
+  <p>Nenhuma solicitação encontrada.</p>
+<% } else { %>
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>Animal</th>
+      <% if (usuario.tipo === 'administrador') { %>
+        <th>Adotante</th>
+      <% } %>
+      <th>Data</th>
+      <th>Status</th>
+    </tr>
+
+    <% solicitacoes.forEach(function(s) { %>
+      <tr>
+        <td><%= s.Animal.nome %></td>
+        <% if (usuario.tipo === 'administrador') { %>
+          <td><%= s.Usuario.nome %></td>
+        <% } %>
+        <td><%= s.createdAt.toLocaleDateString('pt-BR') %></td>
+        <td><%= s.status %></td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

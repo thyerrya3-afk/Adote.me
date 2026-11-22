@@ -7,6 +7,9 @@ const solicitacaoController = require('../controllers/solicitacaoController');
 // Importa o middleware que só deixa passar quem está logado
 const { estaLogado } = require('../middlewares/auth');
 
+// GET /solicitacoes - lista as solicitações (precisa estar logado)
+router.get('/', estaLogado, solicitacaoController.listar);
+
 // POST /solicitacoes - cria uma solicitação (precisa estar logado)
 router.post('/', estaLogado, solicitacaoController.criar);
 

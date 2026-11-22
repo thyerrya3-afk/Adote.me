@@ -1,5 +1,29 @@
 // Importa os models que vamos usar
-const { Solicitacao, Animal } = require('../models');
+const { Solicitacao, Animal, Usuario } = require('../models');
+
+// Lista as solicitações (adotante vê as suas; administrador vê todas)
+exports.listar = async (req, res) => {
+  try {
+    // Começa sem filtro (administrador vê tudo)
+    const filtro = {};
+
+    // Se for adotante, mostra só as solicitações dele (o id vem da sessão)
+    if (req.session.usuario.tipo === 'adotante') {
+      filtro.UsuarioId = req.session.usuario.id;
+    }
+
+    // Busca as solicitações junto com o animal e o usuário de cada uma
+    const solicitacoes = await Solicitacao.findAll({
+      where: filtro,
+      include: [Animal, Usuario],
+      order: [['createdAt', 'DESC']]   // mais recentes primeiro
+    });
+
+    res.render('solicitacoes/index', { solicitacoes });
+  } catch (erro) {
+    res.status(500).send('Erro ao buscar as solicitações.');
+  }
+};
 
 // Cria uma solicitação de adoção (responde em JSON, para o fetch)
 exports.criar = async (req, res) => {
