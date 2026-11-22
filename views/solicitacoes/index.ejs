@@ -17,6 +17,9 @@
       <% } %>
       <th>Data</th>
       <th>Status</th>
+      <% if (usuario.tipo === 'administrador') { %>
+        <th>Ações</th>
+      <% } %>
     </tr>
 
     <% solicitacoes.forEach(function(s) { %>
@@ -26,10 +29,22 @@
           <td><%= s.Usuario.nome %></td>
         <% } %>
         <td><%= s.createdAt.toLocaleDateString('pt-BR') %></td>
-        <td><%= s.status %></td>
+        <td id="status-<%= s.id %>"><%= s.status %></td>
+        <% if (usuario.tipo === 'administrador') { %>
+          <td id="acoes-<%= s.id %>">
+            <% if (s.status === 'pendente') { %>
+              <button class="btn-status" data-id="<%= s.id %>" data-status="aprovada">Aprovar</button>
+              <button class="btn-status" data-id="<%= s.id %>" data-status="recusada">Recusar</button>
+            <% } %>
+          </td>
+        <% } %>
       </tr>
     <% }) %>
   </table>
+<% } %>
+
+<% if (usuario.tipo === 'administrador') { %>
+  <script src="/js/status.js"></script>
 <% } %>
 
 <%- include('../partials/footer') %>

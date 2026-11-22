@@ -66,3 +66,36 @@ exports.criar = async (req, res) => {
     res.status(500).json({ mensagem: 'Erro ao enviar a solicitação.' });
   }
 };
+
+// Atualiza o status de uma solicitação (só o administrador, via fetch)
+exports.atualizarStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    // Só aceita estes dois valores (evita receber qualquer coisa)
+    if (status !== 'aprovada' && status !== 'recusada') {
+      return res.status(400).json({ mensagem: 'Status inválido.' });
+    }
+
+    // Busca a solicitação pelo id que veio na URL
+    const solicitacao = await Solicitacao.findByPk(req.params.id);
+    if (!solicitacao) {
+      return res.status(404).json({ mensagem: 'Solicitação não encontrada.' });
+    }
+
+    // Atualiza o status no banco
+    await solicitacao.update({ status });
+
+    // Se foi aprovada, o animal passa a ficar "adotado"
+    if (status === 'aprovada') {
+      await Animal.update(
+        { situacao: 'adotado' },
+        { where: { id: solicitacao.AnimalId } }
+      );
+    }
+
+    res.json({ mensagem: 'Status atualizado!', status });
+  } catch (erro) {
+    res.status(500).json({ mensagem: 'Erro ao atualizar o status.' });
+  }
+};
