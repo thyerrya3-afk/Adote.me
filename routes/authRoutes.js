@@ -4,6 +4,9 @@ const router = express.Router();
 // Importa o controller de autenticação
 const authController = require('../controllers/authController');
 
+// Importa o limite de tentativas de login
+const limiteLogin = require('../middlewares/limiteLogin');
+
 // GET /cadastro - mostra o formulário de cadastro
 router.get('/cadastro', authController.formularioCadastro);
 
@@ -13,8 +16,8 @@ router.post('/cadastro', authController.cadastrar);
 // GET /login - mostra o formulário de login
 router.get('/login', authController.formularioLogin);
 
-// POST /login - recebe o formulário e faz o login
-router.post('/login', authController.login);
+// POST /login - limita as tentativas e depois faz o login
+router.post('/login', limiteLogin, authController.login);
 
 // POST /logout - encerra a sessão
 router.post('/logout', authController.logout);
