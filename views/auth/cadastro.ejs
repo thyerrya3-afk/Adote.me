@@ -6,20 +6,20 @@
   <p><strong><%= erro %></strong></p>
 <% } %>
 
-<form action="/cadastro" method="POST">
+<form action="/cadastro" method="POST" autocomplete="off">
   <p>
     <label>Nome:</label><br>
-    <input type="text" name="nome" required>
+    <input type="text" name="nome" autocomplete="off" required>
   </p>
 
   <p>
     <label>E-mail:</label><br>
-    <input type="email" name="email" required>
+    <input type="email" name="email" autocomplete="off" required>
   </p>
 
   <p>
     <label>Senha (mínimo 6 caracteres):</label><br>
-    <input type="password" name="senha" minlength="6" required>
+    <input type="password" name="senha" minlength="6" autocomplete="new-password" required>
   </p>
 
   <button type="submit">Cadastrar</button>
