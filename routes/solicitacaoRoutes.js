@@ -16,5 +16,8 @@ router.post('/', estaLogado, solicitacaoController.criar);
 // PATCH /solicitacoes/3/status - atualiza o status (só administrador)
 router.patch('/:id/status', ehAdmin, solicitacaoController.atualizarStatus);
 
+// POST /solicitacoes/3/cancelar - cancela a própria solicitação (precisa estar logado)
+router.post('/:id/cancelar', estaLogado, solicitacaoController.cancelar);
+
 // Exporta as rotas
 module.exports = router;

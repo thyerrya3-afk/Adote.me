@@ -99,3 +99,29 @@ exports.atualizarStatus = async (req, res) => {
     res.status(500).json({ mensagem: 'Erro ao atualizar o status.' });
   }
 };
+
+// Cancela (exclui) uma solicitação pendente do próprio adotante
+exports.cancelar = async (req, res) => {
+  try {
+    // Busca a solicitação pelo id da URL, mas SÓ se ela for do usuário logado
+    // e ainda estiver pendente
+    const solicitacao = await Solicitacao.findOne({
+      where: {
+        id: req.params.id,
+        UsuarioId: req.session.usuario.id,
+        status: 'pendente'
+      }
+    });
+
+    if (!solicitacao) {
+      return res.status(404).send('Solicitação não encontrada ou não pode ser cancelada.');
+    }
+
+    // Apaga a linha da tabela (é o DELETE)
+    await solicitacao.destroy();
+
+    res.redirect('/solicitacoes');
+  } catch (erro) {
+    res.status(500).send('Erro ao cancelar a solicitação.');
+  }
+};

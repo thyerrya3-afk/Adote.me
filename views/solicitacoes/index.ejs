@@ -17,9 +17,7 @@
       <% } %>
       <th>Data</th>
       <th>Status</th>
-      <% if (usuario.tipo === 'administrador') { %>
-        <th>Ações</th>
-      <% } %>
+      <th>Ações</th>
     </tr>
 
     <% solicitacoes.forEach(function(s) { %>
@@ -30,14 +28,19 @@
         <% } %>
         <td><%= s.createdAt.toLocaleDateString('pt-BR') %></td>
         <td id="status-<%= s.id %>"><%= s.status %></td>
-        <% if (usuario.tipo === 'administrador') { %>
-          <td id="acoes-<%= s.id %>">
-            <% if (s.status === 'pendente') { %>
+        <td id="acoes-<%= s.id %>">
+          <% if (s.status === 'pendente') { %>
+            <% if (usuario.tipo === 'administrador') { %>
               <button class="btn-status" data-id="<%= s.id %>" data-status="aprovada">Aprovar</button>
               <button class="btn-status" data-id="<%= s.id %>" data-status="recusada">Recusar</button>
+            <% } else { %>
+              <form action="/solicitacoes/<%= s.id %>/cancelar" method="POST"
+                    onsubmit="return confirm('Deseja cancelar esta solicitação?');">
+                <button type="submit">Cancelar</button>
+              </form>
             <% } %>
-          </td>
-        <% } %>
+          <% } %>
+        </td>
       </tr>
     <% }) %>
   </table>
