@@ -21,8 +21,8 @@ const solicitacaoRoutes = require('./routes/solicitacaoRoutes');
 // Cria a aplicação. Todo o projeto vai se apoiar neste "app"
 const app = express();
 
-// Define a porta onde o servidor vai rodar
-const PORT = 3000;
+// Porta do servidor: usa a da hospedagem, ou 3000 no seu computador
+const PORT = process.env.PORT || 3000;
 
 // Diz ao Express que as páginas serão feitas com EJS
 app.set('view engine', 'ejs');
@@ -73,7 +73,7 @@ sequelize.sync()
   .then(() => {
     console.log('Tabelas sincronizadas com o banco de dados!');
     app.listen(PORT, () => {
-      console.log(`Servidor rodando em http://localhost:${PORT}`);
+      console.log(`Servidor rodando na porta ${PORT}`);
     });
   })
   .catch((erro) => {
