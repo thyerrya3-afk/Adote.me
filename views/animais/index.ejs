@@ -11,6 +11,11 @@
 <% } else { %>
   <% animais.forEach(function(animal) { %>
     <div>
+      <% if (animal.foto) { %>
+        <img src="<%= animal.foto %>" alt="Foto de <%= animal.nome %>" class="foto-animal"
+             onerror="this.style.display='none'">
+      <% } %>
+
       <h3><%= animal.nome %></h3>
       <p>Espécie: <%= animal.especie %></p>
       <p>Idade: <%= animal.idade %> ano(s)</p>

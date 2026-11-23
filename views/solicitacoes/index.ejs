@@ -22,9 +22,9 @@
 
     <% solicitacoes.forEach(function(s) { %>
       <tr>
-        <td><%= s.Animal.nome %></td>
+        <td><%= s.Animal ? s.Animal.nome : '(animal removido)' %></td>
         <% if (usuario.tipo === 'administrador') { %>
-          <td><%= s.Usuario.nome %></td>
+          <td><%= s.Usuario ? s.Usuario.nome : '(usuário removido)' %></td>
         <% } %>
         <td><%= s.createdAt.toLocaleDateString('pt-BR') %></td>
         <td id="status-<%= s.id %>"><%= s.status %></td>

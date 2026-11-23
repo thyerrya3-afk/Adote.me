@@ -35,6 +35,11 @@
   </p>
 
   <p>
+    <label>Link da foto (opcional):</label><br>
+    <input type="url" name="foto" value="<%= animal.foto || '' %>" placeholder="https://...">
+  </p>
+
+  <p>
     <label>Descrição:</label><br>
     <textarea name="descricao" rows="4" cols="40"><%= animal.descricao %></textarea>
   </p>

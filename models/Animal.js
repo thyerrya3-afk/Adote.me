@@ -26,6 +26,10 @@ const Animal = sequelize.define('Animal', {
     type: DataTypes.TEXT,      // texto longo
     allowNull: true            // pode ficar vazio
   },
+  foto: {
+    type: DataTypes.STRING(500), // link (URL) da foto
+    allowNull: true              // a foto é opcional
+  },
   situacao: {
     type: DataTypes.ENUM('disponivel', 'adotado'),
     allowNull: false,
