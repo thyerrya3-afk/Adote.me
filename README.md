@@ -2,7 +2,7 @@
 
 Sistema web para facilitar a adoção de animais. Projeto Integrador da disciplina de Programação Web.
 
-**Autor:** [Thyerry Anthony Santos Dutra]
+**Autor:** [SEU NOME COMPLETO]
 
 ## Acesso
 
@@ -15,19 +15,19 @@ Sistema web para facilitar a adoção de animais. Projeto Integrador da discipli
 
 | Perfil | E-mail | Senha |
 |---|---|---|
-| Administrador | [admthyerry@gmail.com] | enviada ao professor por mensagem |
-| Adotante | [adomaria@gmail.com] | enviada ao professor por mensagem |
+| Administrador | [E-MAIL DO ADMINISTRADOR] | enviada ao professor por mensagem |
+| Adotante | [E-MAIL DO ADOTANTE] | enviada ao professor por mensagem |
 
 ## Sobre o projeto
 
-O Adote.me permite que pessoas vejam os animais disponíveis para adoção e demonstrem interesse em adotar. Uma área administrativa permite gerenciar os animais e acompanhar as solicitações.
+O Adote.me permite que pessoas vejam os animais disponíveis para adoção e demonstrem interesse em adotar. Uma área administrativa permite gerenciar os animais e acompanhar as solicitações. A página inicial apresenta o projeto e explica como a adoção funciona.
 
 ## Funcionalidades
 
 **Adotante**
 
 - Criar uma conta, entrar e sair.
-- Ver os animais cadastrados.
+- Ver os animais cadastrados, com foto, quando houver.
 - Enviar solicitação de adoção (sem recarregar a página).
 - Acompanhar as próprias solicitações.
 - Cancelar uma solicitação que ainda está pendente.
@@ -35,7 +35,7 @@ O Adote.me permite que pessoas vejam os animais disponíveis para adoção e dem
 **Administrador**
 
 - Entrar e sair.
-- Cadastrar, listar, editar e excluir animais.
+- Cadastrar, listar, editar e excluir animais (com link de foto opcional). Ao excluir um animal, as solicitações dele também são removidas.
 - Ver todas as solicitações de adoção.
 - Aprovar ou recusar solicitações (sem recarregar a página). Ao aprovar, o animal passa a ficar como "adotado".
 
@@ -53,6 +53,7 @@ O Adote.me permite que pessoas vejam os animais disponíveis para adoção e dem
 | express-rate-limit | Limite de tentativas de login |
 | dotenv | Variáveis de ambiente |
 | Fetch API | Funções AJAX |
+| HTML e CSS | Páginas e estilo (fontes Fredoka e Nunito, do Google Fonts) |
 
 ## Estrutura de pastas (MVC)
 
@@ -63,6 +64,7 @@ Adote.me/
 │   └── database.js        # conexão com o banco (Sequelize)
 ├── models/                # Model: Usuario, Animal, Solicitacao e relacionamentos
 ├── views/                 # View: páginas EJS
+│   ├── index.ejs          # página inicial
 │   ├── partials/          # layout: header.ejs e footer.ejs
 │   ├── animais/
 │   ├── auth/
@@ -103,6 +105,7 @@ erDiagram
         int idade
         enum sexo
         text descricao
+        string foto
         enum situacao
     }
     SOLICITACOES {
@@ -114,7 +117,7 @@ erDiagram
     }
 ```
 
-A data da solicitação é a coluna `createdAt`, criada automaticamente pelo Sequelize.
+A data da solicitação é a coluna `createdAt`, criada automaticamente pelo Sequelize. A foto do animal é um link (URL) para uma imagem, e é opcional.
 
 ## Requisitos do projeto
 
@@ -176,6 +179,7 @@ O administrador clica em "Aprovar" ou "Recusar" e o navegador envia um `PATCH /s
 | Cookie de sessão | `httpOnly` e expiração de 1 hora |
 | Cadastro sem privilégio | O cadastro sempre cria um adotante. O administrador é definido direto no banco |
 | Validação de entrada | O status recebido no AJAX só aceita `aprovada` ou `recusada` |
+| Links de foto | `limparFoto` só aceita endereços que começam com `http://` ou `https://` |
 | Mensagem de login genérica | E-mail inexistente e senha errada mostram a mesma mensagem |
 | Ações que alteram dados | Feitas com POST ou PATCH, nunca com GET |
 | Proteção contra SQL injection | Consultas feitas pelo Sequelize, sem montar SQL na mão |
@@ -256,7 +260,7 @@ npm test
 
 - As sessões ficam na memória do servidor. Se a hospedagem reiniciar, os usuários precisam entrar de novo.
 - O primeiro acesso depois de um período parado pode ser lento, por causa do plano gratuito.
-- Não há upload de fotos dos animais, para manter o projeto simples.
+- Não há upload de fotos: o administrador informa o link de uma imagem que já esteja na internet. Se o link sair do ar, a foto deixa de aparecer.
 
 ## Uso de inteligência artificial
 
