@@ -18,8 +18,12 @@
       <p>Situação: <%= animal.situacao %></p>
 
       <% if (animal.foto) { %>
-        <img src="<%= animal.foto %>" alt="Foto de <%= animal.nome %>" class="foto-animal"
-             onerror="this.style.display='none'">
+        <div class="fotos">
+          <% animal.foto.split('\n').forEach(function(link) { %>
+            <img src="<%= link %>" alt="Foto de <%= animal.nome %>" class="foto-animal"
+                 onerror="this.style.display='none'">
+          <% }) %>
+        </div>
       <% } %>
 
       <% if (usuario && usuario.tipo === 'administrador') { %>

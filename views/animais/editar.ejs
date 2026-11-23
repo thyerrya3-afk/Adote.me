@@ -35,8 +35,8 @@
   </p>
 
   <p>
-    <label>Link da foto (opcional):</label><br>
-    <input type="url" name="foto" value="<%= animal.foto || '' %>" placeholder="https://...">
+    <label>Links das fotos (opcional, até 3, um link por linha):</label><br>
+    <textarea name="foto" rows="3" placeholder="https://..."><%= animal.foto || '' %></textarea>
   </p>
 
   <p>

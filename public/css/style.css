@@ -149,16 +149,22 @@ main > div p {
   margin: 4px 0;
 }
 
-/* Foto do animal: pequena e com menos corte */
+/* Caixa das fotos: as imagens ficam lado a lado e quebram de linha */
+.fotos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+
+/* Cada foto do animal */
 .foto-animal {
   display: block;
-  width: 100%;
-  max-width: 260px;
-  aspect-ratio: 4 / 3;
+  width: 190px;
+  height: 140px;
   object-fit: cover;
   object-position: center 30%;
   border-radius: 10px;
-  margin: 10px 0 14px;
 }
 
 /* Mensagem que aparece ao clicar em "Quero adotar" */

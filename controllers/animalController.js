@@ -1,13 +1,20 @@
 // Importa os models (usa o index.js da pasta models)
 const { Animal, Solicitacao } = require('../models');
 
-// Só aceita links que começam com http:// ou https:// (senão, guarda vazio)
-function limparFoto(foto) {
-  const link = (foto || '').trim();
-  if ((link.startsWith('http://') || link.startsWith('https://')) && link.length <= 500) {
-    return link;
-  }
-  return null;
+// Recebe o texto do campo das fotos (um link por linha) e devolve
+// no máximo 3 links válidos, separados por quebra de linha.
+// Só aceita links que começam com http:// ou https://
+function limparFotos(texto) {
+  const links = String(texto || '')
+    .split('\n')                         // separa uma linha por link
+    .map((linha) => linha.trim())        // tira espaços das pontas
+    .filter((link) =>
+      (link.startsWith('http://') || link.startsWith('https://')) &&
+      link.length <= 480                 // cada link tem no máximo 480 caracteres
+    )
+    .slice(0, 3);                        // fica só com os 3 primeiros
+
+  return links.length > 0 ? links.join('\n') : null;
 }
 
 // Lista todos os animais
@@ -31,7 +38,7 @@ exports.criar = async (req, res) => {
     const { nome, especie, idade, sexo, descricao, foto } = req.body;
     await Animal.create({
       nome, especie, idade, sexo, descricao,
-      foto: limparFoto(foto)
+      foto: limparFotos(foto)
     });
     res.redirect('/animais');
   } catch (erro) {
@@ -66,7 +73,7 @@ exports.atualizar = async (req, res) => {
     const { nome, especie, idade, sexo, descricao, situacao, foto } = req.body;
     await animal.update({
       nome, especie, idade, sexo, descricao, situacao,
-      foto: limparFoto(foto)
+      foto: limparFotos(foto)
     });
 
     res.redirect('/animais');

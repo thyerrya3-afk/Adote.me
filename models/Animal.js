@@ -27,8 +27,8 @@ const Animal = sequelize.define('Animal', {
     allowNull: true            // pode ficar vazio
   },
   foto: {
-    type: DataTypes.STRING(500), // link (URL) da foto
-    allowNull: true              // a foto é opcional
+    type: DataTypes.STRING(1500), // até 3 links de foto, um por linha
+    allowNull: true               // as fotos são opcionais
   },
   situacao: {
     type: DataTypes.ENUM('disponivel', 'adotado'),
