@@ -1,6 +1,67 @@
 <%- include('partials/header') %>
 
-<h1>Bem-vindo ao Adote.me!</h1>
-<p>Esta página usa o layout com cabeçalho e rodapé.</p>
+<section class="hero">
+  <div class="emojis">🐶 🐱 🐰</div>
+  <h1>Dê um lar para quem precisa de um</h1>
+  <p>
+    O Adote.me aproxima animais que esperam por uma família de pessoas que querem adotar.
+    Veja quem está disponível e envie o seu pedido de adoção em poucos cliques.
+  </p>
+  <a class="btn btn-laranja" href="/animais">Ver animais</a>
+  <% if (!usuario) { %>
+    <a class="btn btn-borda" href="/cadastro">Criar conta</a>
+  <% } %>
+</section>
+
+<section class="secao">
+  <h2>O que é o Adote.me?</h2>
+  <div class="texto-box">
+    <p>
+      O Adote.me é um sistema web criado como projeto integrador da disciplina de
+      Programação Web. Ele reúne em um só lugar os animais disponíveis para adoção,
+      com informações como espécie, idade, sexo e descrição.
+    </p>
+    <p>
+      Quem quer adotar cria uma conta, escolhe um animal e envia uma solicitação.
+      O administrador cadastra os animais e acompanha os pedidos, aprovando ou recusando cada um.
+    </p>
+  </div>
+</section>
+
+<section class="secao">
+  <h2>Como funciona</h2>
+  <div class="passos">
+    <div class="passo">
+      <div class="icone">📝</div>
+      <h3>Crie sua conta</h3>
+      <p>Cadastre-se e entre no sistema para poder pedir uma adoção.</p>
+    </div>
+    <div class="passo">
+      <div class="icone">🐶</div>
+      <h3>Escolha um animal</h3>
+      <p>Veja os animais disponíveis e clique em "Quero adotar".</p>
+    </div>
+    <div class="passo">
+      <div class="icone">✅</div>
+      <h3>Acompanhe o pedido</h3>
+      <p>Veja em "Solicitações" se o seu pedido foi aprovado ou recusado.</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao">
+  <h2>Por que adotar?</h2>
+  <div class="texto-box">
+    <p>
+      Adotar dá uma nova chance a um animal que precisa de cuidado e carinho.
+      Mas é uma decisão para pensar com calma: um animal depende de você por muitos anos
+      e precisa de alimentação, saúde e atenção.
+    </p>
+    <p>
+      A adoção responsável é um compromisso. Antes de pedir, converse com a sua família
+      e confira se você tem tempo e condições de cuidar bem de um novo amigo.
+    </p>
+  </div>
+</section>
 
 <%- include('partials/footer') %>
