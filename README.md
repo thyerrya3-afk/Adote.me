@@ -2,7 +2,7 @@
 
 Sistema web para facilitar a adoção de animais. Projeto Integrador da disciplina de Programação Web.
 
-**Autor:** [SEU NOME COMPLETO]
+**Autor:** [Thyerry Anthony Santos Dutra]
 
 ## Acesso
 
@@ -15,8 +15,8 @@ Sistema web para facilitar a adoção de animais. Projeto Integrador da discipli
 
 | Perfil | E-mail | Senha |
 |---|---|---|
-| Administrador | [E-MAIL DO ADMINISTRADOR] | enviada ao professor por mensagem |
-| Adotante | [E-MAIL DO ADOTANTE] | enviada ao professor por mensagem |
+| Administrador | [admthyerry@gmail.com] |
+| Adotante | [adomaria@gmail.com] | 
 
 ## Sobre o projeto
 
