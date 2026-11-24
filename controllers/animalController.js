@@ -71,10 +71,23 @@ exports.atualizar = async (req, res) => {
     }
 
     const { nome, especie, idade, sexo, descricao, situacao, foto } = req.body;
+
+    // Guarda a situação de antes, para saber se ela mudou
+    const situacaoAnterior = animal.situacao;
+
     await animal.update({
       nome, especie, idade, sexo, descricao, situacao,
       foto: limparFotos(foto)
     });
+
+    // Se o animal estava "adotado" e voltou a ficar "disponivel",
+    // a solicitação que tinha sido aprovada passa a ser recusada
+    if (situacaoAnterior === 'adotado' && situacao === 'disponivel') {
+      await Solicitacao.update(
+        { status: 'recusada' },
+        { where: { AnimalId: animal.id, status: 'aprovada' } }
+      );
+    }
 
     res.redirect('/animais');
   } catch (erro) {
