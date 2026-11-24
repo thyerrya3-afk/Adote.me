@@ -435,3 +435,24 @@ footer::before {
     overflow-x: auto;
   }
 }
+
+/* Descrição do animal (respeita as quebras de linha) */
+.descricao {
+  white-space: pre-line;
+  margin: 8px 0;
+}
+
+/* Listas dentro das caixas de texto da página inicial */
+.texto-box ul {
+  margin: 0 0 10px;
+  padding-left: 22px;
+}
+
+.texto-box li {
+  margin-bottom: 6px;
+}
+
+/* Caixa de aviso (borda laranja) */
+.aviso {
+  border-left-color: var(--laranja);
+}

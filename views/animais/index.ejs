@@ -17,6 +17,10 @@
       <p>Sexo: <%= animal.sexo %></p>
       <p>Situação: <%= animal.situacao %></p>
 
+      <% if (animal.descricao) { %>
+        <p class="descricao"><%= animal.descricao %></p>
+      <% } %>
+
       <% if (animal.foto) { %>
         <div class="fotos">
           <% animal.foto.split('\n').forEach(function(link) { %>

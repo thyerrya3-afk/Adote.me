@@ -5,7 +5,7 @@
   <h1>Dê um lar para quem precisa de um</h1>
   <p>
     O Adote.me aproxima animais que esperam por uma família de pessoas que querem adotar.
-    Veja quem está disponível e envie o seu pedido de adoção em poucos cliques.
+    Veja quem está disponível e envie o seu pedido de adoção.
   </p>
   <a class="btn btn-laranja" href="/animais">Ver animais</a>
   <% if (!usuario) { %>
@@ -19,7 +19,7 @@
     <p>
       O Adote.me é um sistema web criado como projeto integrador da disciplina de
       Programação Web. Ele reúne em um só lugar os animais disponíveis para adoção,
-      com informações como espécie, idade, sexo e descrição.
+      com informações como espécie, idade, sexo, descrição e fotos.
     </p>
     <p>
       Quem quer adotar cria uma conta, escolhe um animal e envia uma solicitação.
@@ -29,23 +29,50 @@
 </section>
 
 <section class="secao">
-  <h2>Como funciona</h2>
+  <h2>Como é o processo de adoção</h2>
   <div class="passos">
     <div class="passo">
       <div class="icone">📝</div>
-      <h3>Crie sua conta</h3>
-      <p>Cadastre-se e entre no sistema para poder pedir uma adoção.</p>
+      <h3>1. Solicitação</h3>
+      <p>Crie sua conta, escolha um animal disponível e clique em "Quero adotar".</p>
     </div>
     <div class="passo">
-      <div class="icone">🐶</div>
-      <h3>Escolha um animal</h3>
-      <p>Veja os animais disponíveis e clique em "Quero adotar".</p>
+      <div class="icone">🔎</div>
+      <h3>2. Análise</h3>
+      <p>O administrador analisa o seu pedido. Você acompanha o resultado em "Solicitações".</p>
     </div>
     <div class="passo">
-      <div class="icone">✅</div>
-      <h3>Acompanhe o pedido</h3>
-      <p>Veja em "Solicitações" se o seu pedido foi aprovado ou recusado.</p>
+      <div class="icone">💬</div>
+      <h3>3. Conversa</h3>
+      <p>Se o pedido seguir, entramos em contato para conversar sobre a sua rotina e o animal.</p>
     </div>
+    <div class="passo">
+      <div class="icone">🏠</div>
+      <h3>4. Adoção</h3>
+      <p>Com tudo certo, você assina o termo de adoção responsável e leva o novo amigo para casa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao">
+  <h2>Requisitos para adotar</h2>
+  <div class="texto-box">
+    <ul>
+      <li>Ter 18 anos ou mais.</li>
+      <li>Apresentar um documento com foto e um comprovante de residência.</li>
+      <li>Morar em um local onde animais são permitidos, com o consentimento de quem mora com você.</li>
+      <li>Ter tempo, condições financeiras e disposição para cuidar: alimentação, vacinas e veterinário.</li>
+      <li>Se comprometer a nunca abandonar o animal e a avisar se não puder mais cuidar dele.</li>
+      <li>Assinar o termo de adoção responsável.</li>
+      <li>Aceitar conversas de acompanhamento depois da adoção.</li>
+    </ul>
+  </div>
+  <div class="texto-box aviso" style="margin-top: 14px;">
+    <p>
+      <strong>Importante:</strong> enviar uma solicitação não garante a adoção.
+      Todo pedido passa por uma análise, e o objetivo é que cada animal vá para uma casa
+      preparada para recebê-lo.
+    </p>
   </div>
 </section>
 
@@ -54,8 +81,7 @@
   <div class="texto-box">
     <p>
       Adotar dá uma nova chance a um animal que precisa de cuidado e carinho.
-      Mas é uma decisão para pensar com calma: um animal depende de você por muitos anos
-      e precisa de alimentação, saúde e atenção.
+      Mas é uma decisão para pensar com calma: um animal depende de você por muitos anos.
     </p>
     <p>
       A adoção responsável é um compromisso. Antes de pedir, converse com a sua família
