@@ -15,6 +15,10 @@ const Usuario = sequelize.define('Usuario', {
     allowNull: false,
     unique: true              // não permite dois usuários com o mesmo e-mail
   },
+  telefone: {
+    type: DataTypes.STRING(20),
+    allowNull: true           // opcional no banco (contas antigas não têm)
+  },
   senha: {
     type: DataTypes.STRING,
     allowNull: false

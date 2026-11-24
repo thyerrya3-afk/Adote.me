@@ -14,6 +14,7 @@
       <th>Animal</th>
       <% if (usuario.tipo === 'administrador') { %>
         <th>Adotante</th>
+        <th>Contato</th>
       <% } %>
       <th>Data</th>
       <th>Status</th>
@@ -25,6 +26,14 @@
         <td><%= s.Animal ? s.Animal.nome : '(animal removido)' %></td>
         <% if (usuario.tipo === 'administrador') { %>
           <td><%= s.Usuario ? s.Usuario.nome : '(usuário removido)' %></td>
+          <td>
+            <% if (s.Usuario) { %>
+              <%= s.Usuario.email %><br>
+              <%= s.Usuario.telefone || '—' %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
         <% } %>
         <td><%= s.createdAt.toLocaleDateString('pt-BR') %></td>
         <td id="status-<%= s.id %>"><%= s.status %></td>

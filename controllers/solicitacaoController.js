@@ -12,10 +12,14 @@ exports.listar = async (req, res) => {
       filtro.UsuarioId = req.session.usuario.id;
     }
 
-    // Busca as solicitações junto com o animal e o usuário de cada uma
+    // Busca as solicitações junto com o animal e o usuário de cada uma.
+    // Do usuário trazemos só o necessário (nunca a senha).
     const solicitacoes = await Solicitacao.findAll({
       where: filtro,
-      include: [Animal, Usuario],
+      include: [
+        Animal,
+        { model: Usuario, attributes: ['id', 'nome', 'email', 'telefone'] }
+      ],
       order: [['createdAt', 'DESC']]   // mais recentes primeiro
     });
 

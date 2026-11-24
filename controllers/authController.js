@@ -12,7 +12,13 @@ exports.formularioCadastro = (req, res) => {
 // Recebe os dados do formulário e cria o usuário
 exports.cadastrar = async (req, res) => {
   try {
-    const { nome, email, senha } = req.body;
+    const { nome, email, telefone, senha } = req.body;
+
+    // Telefone: só números, espaços e os símbolos ( ) + - , de 8 a 20 caracteres
+    const telefoneLimpo = String(telefone || '').trim();
+    if (!/^[0-9()+\-\s]{8,20}$/.test(telefoneLimpo)) {
+      return res.render('auth/cadastro', { erro: 'Informe um telefone válido, com DDD.' });
+    }
 
     // Verifica se já existe um usuário com esse e-mail
     const existente = await Usuario.findOne({ where: { email } });
@@ -24,7 +30,13 @@ exports.cadastrar = async (req, res) => {
     const hash = await bcrypt.hash(senha, 10);
 
     // Salva o usuário. O tipo é sempre "adotante" no cadastro
-    await Usuario.create({ nome, email, senha: hash, tipo: 'adotante' });
+    await Usuario.create({
+      nome,
+      email,
+      telefone: telefoneLimpo,
+      senha: hash,
+      tipo: 'adotante'
+    });
 
     // Depois de cadastrar, vai para a página de login
     res.redirect('/login');
