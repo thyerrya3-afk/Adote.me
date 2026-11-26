@@ -262,6 +262,3 @@ npm test
 - O primeiro acesso depois de um período parado pode ser lento, por causa do plano gratuito.
 - Não há upload de fotos: o administrador informa o link de uma imagem que já esteja na internet. Se o link sair do ar, a foto deixa de aparecer.
 
-## Uso de inteligência artificial
-
-Parte do código e das explicações deste projeto foi desenvolvida com o auxílio do Claude (Anthropic), em um passo a passo. Todo o código foi testado e revisado pelo autor, que é capaz de explicar o funcionamento de cada parte.
